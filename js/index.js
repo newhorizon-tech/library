@@ -16,9 +16,9 @@ const addBookToLibrary = (CurrentBook) => {
   myLibrary.push(CurrentBook);
   // myLibrary.forEach(book => console.log(book.title))
   return false;
-}
+};
 
-deleteGroup = (book, card) => {
+const deleteGroup = (book, card) => {
   const createBtn = document.createElement('button');
 
   createBtn.addEventListener('click', () => {
@@ -33,45 +33,7 @@ deleteGroup = (book, card) => {
   card.appendChild(createBtn);
 };
 
-displayBook = (book) => {
-  const BookGroup = document.querySelector('#book-group');
-  const card = document.createElement('div');
-  card.className = "card m-2";
-
-  const cardbody = document.createElement('div');
-  cardbody.className = "card-body";
-
-  const title = document.createElement('p');
-  title.className = "card-title";
-
-  const author = document.createElement('h5');
-  author.className = "card-text";
-
-  const pages = document.createElement('p');
-  pages.className = "card-text"
-
-  const read = document.createElement('p');
-  read.className = "card-text read-status"
-
-
-  title.textContent = book.title;
-  author.textContent = book.author;
-  pages.textContent = book.pages + ' Pages';
-  read.textContent =  book.read;
-
-  cardbody.appendChild(author);
-  cardbody.appendChild(title);
-  cardbody.appendChild(pages);
-  cardbody.appendChild(read);
-  
-  card.appendChild(cardbody);
-  readStatus(book, card);
-  deleteGroup(book, card);
-  BookGroup.appendChild(card);
-  
-};
-
-readStatus = (book, card) => {
+function readStatus(book, card) {
   const createBtn = document.createElement('button');
 
   createBtn.addEventListener('click', () => {
@@ -88,6 +50,43 @@ readStatus = (book, card) => {
   createBtn.textContent = 'Toggle status';
   createBtn.setAttribute('class', 'btn btn-success');
   card.appendChild(createBtn);
+}
+
+const displayBook = (book) => {
+  const BookGroup = document.querySelector('#book-group');
+  const card = document.createElement('div');
+  card.className = 'card m-2';
+
+  const cardbody = document.createElement('div');
+  cardbody.className = 'card-body';
+
+  const title = document.createElement('p');
+  title.className = 'card-title';
+
+  const author = document.createElement('h5');
+  author.className = 'card-text';
+
+  const pages = document.createElement('p');
+  pages.className = 'card-text';
+
+  const read = document.createElement('p');
+  read.className = 'card-text read-status';
+
+
+  title.textContent = book.title;
+  author.textContent = book.author;
+  pages.textContent = `${book.pages} Pages`;
+  read.textContent = book.read;
+
+  cardbody.appendChild(author);
+  cardbody.appendChild(title);
+  cardbody.appendChild(pages);
+  cardbody.appendChild(read);
+
+  card.appendChild(cardbody);
+  readStatus(book, card);
+  deleteGroup(book, card);
+  BookGroup.appendChild(card);
 };
 
 // console.log(displayBook);
@@ -99,7 +98,7 @@ submit.onclick = () => {
   const possibleReadValues = newBookForm.querySelectorAll('input[name="read"]');
   let read;
   if (possibleReadValues[0].checked) {
-    read= 'Read';
+    read = 'Read';
   } else {
     read = 'Not Read';
   }
@@ -107,4 +106,4 @@ submit.onclick = () => {
   displayBook(book);
   addBookToLibrary(book);
   return false;
-}
+};
