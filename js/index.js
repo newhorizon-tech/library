@@ -85,6 +85,30 @@ const displayBook = (book) => {
   BookGroup.appendChild(card);
 };
 
+showAlert(message, className) {
+  const div = document.createElement('div');
+  div.className = `alert alert-${className}`;
+
+  div.appendChild(document.createElement('message'));
+  const container = document.querySelector('.container');
+  const form = document.querySelector('#newBookForm');
+  container.insertBefore(div, form);
+
+  setTimeout(() => document.querySelector('.alert').remove(), 3000);
+}
+
+const title = document.querySelector('#title').value;
+const author = document.querySelector('#author').value;
+const pages = document.querySelector('#pages').value;
+
+if (title === '', author === '', pages === '') {
+  showAlert('Please fill the bank fields', 'danger');
+} else {
+  const book = new Book(title, author, pages);
+}
+
+showAlert('Book added', 'success');
+
 submit.onclick = () => {
   const title = newBookForm.querySelector('input[name="title"').value;
   const author = newBookForm.querySelector('input[name="author"').value;
