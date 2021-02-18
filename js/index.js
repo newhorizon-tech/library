@@ -10,11 +10,8 @@ function Book(author, title, pages, read) {
   this.read = read;
 }
 
-// const CurrentBook = new Book(author.value, title.value, pages.value, read.checked);
-
 const addBookToLibrary = (CurrentBook) => {
   myLibrary.push(CurrentBook);
-  // myLibrary.forEach(book => console.log(book.title))
   return false;
 };
 
@@ -72,7 +69,6 @@ const displayBook = (book) => {
   const read = document.createElement('p');
   read.className = 'card-text read-status';
 
-
   title.textContent = book.title;
   author.textContent = book.author;
   pages.textContent = `${book.pages} Pages`;
@@ -89,9 +85,7 @@ const displayBook = (book) => {
   BookGroup.appendChild(card);
 };
 
-// console.log(displayBook);
 submit.onclick = () => {
-  // e.preventDefault();
   const title = newBookForm.querySelector('input[name="title"').value;
   const author = newBookForm.querySelector('input[name="author"').value;
   const pages = newBookForm.querySelector('input[name="pages"').value;
