@@ -1,6 +1,9 @@
+import { testFunction } from './dom'
+
+testFunction();
+
 const myLibrary = [];
 const { newBookForm } = document.forms;
-
 const submit = document.querySelector('#form-button');
 
 function Book(author, title, pages, read) {
@@ -52,7 +55,7 @@ function readStatus(book, card) {
 const displayBook = (book) => {
   const BookGroup = document.querySelector('#book-group');
   const card = document.createElement('div');
-  card.className = 'card m-2';
+  card.className = 'card p-1';
 
   const cardbody = document.createElement('div');
   cardbody.className = 'card-body';
@@ -85,29 +88,6 @@ const displayBook = (book) => {
   BookGroup.appendChild(card);
 };
 
-showAlert(message, className) {
-  const div = document.createElement('div');
-  div.className = `alert alert-${className}`;
-
-  div.appendChild(document.createElement('message'));
-  const container = document.querySelector('.container');
-  const form = document.querySelector('#newBookForm');
-  container.insertBefore(div, form);
-
-  setTimeout(() => document.querySelector('.alert').remove(), 3000);
-}
-
-const title = document.querySelector('#title').value;
-const author = document.querySelector('#author').value;
-const pages = document.querySelector('#pages').value;
-
-if (title === '', author === '', pages === '') {
-  showAlert('Please fill the bank fields', 'danger');
-} else {
-  const book = new Book(title, author, pages);
-}
-
-showAlert('Book added', 'success');
 
 submit.onclick = () => {
   const title = newBookForm.querySelector('input[name="title"').value;
@@ -120,8 +100,15 @@ submit.onclick = () => {
   } else {
     read = 'Not Read';
   }
-  const book = new Book(title, author, pages, read);
-  displayBook(book);
-  addBookToLibrary(book);
+
+  if (title === '' || author === '' || parseInt(pages, 10) < 1) {
+    showAlert('Invalid input', 'danger');
+  } else {
+    const book = new Book(title, author, pages, read);
+    displayBook(book);
+    addBookToLibrary(book);
+    showAlert('Book added!', 'success');
+  }
+
   return false;
 };
