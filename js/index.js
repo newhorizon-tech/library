@@ -1,4 +1,4 @@
-let myLibrary = [];
+const myLibrary = [];
 const { newBookForm } = document.forms;
 
 const submit = document.querySelector('#form-button');
@@ -51,13 +51,13 @@ displayBook = (book) => {
   pages.className = "card-text"
 
   const read = document.createElement('p');
-  read.className = "card-text"
+  read.className = "card-text read-status"
 
 
   title.textContent = book.title;
   author.textContent = book.author;
   pages.textContent = book.pages + ' Pages';
-  read.textContent = 'Have you read the book? ' + book.read;
+  read.textContent =  book.read;
 
   cardbody.appendChild(author);
   cardbody.appendChild(title);
@@ -65,9 +65,29 @@ displayBook = (book) => {
   cardbody.appendChild(read);
   
   card.appendChild(cardbody);
+  readStatus(book, card);
   deleteGroup(book, card);
   BookGroup.appendChild(card);
   
+};
+
+readStatus = (book, card) => {
+  const createBtn = document.createElement('button');
+
+  createBtn.addEventListener('click', () => {
+    const status = card.querySelector('.read-status');
+    if (book.read === 'Read') {
+      status.textContent = 'Not Read';
+      book.read = 'Not Read';
+    } else {
+      status.textContent = 'Read';
+      book.read = 'Read';
+    }
+  });
+
+  createBtn.textContent = 'Toggle status';
+  createBtn.setAttribute('class', 'btn btn-success');
+  card.appendChild(createBtn);
 };
 
 // console.log(displayBook);
@@ -79,9 +99,9 @@ submit.onclick = () => {
   const possibleReadValues = newBookForm.querySelectorAll('input[name="read"]');
   let read;
   if (possibleReadValues[0].checked) {
-    read = 'Yes';
+    read= 'Read';
   } else {
-    read = 'No';
+    read = 'Not Read';
   }
   const book = new Book(title, author, pages, read);
   displayBook(book);
