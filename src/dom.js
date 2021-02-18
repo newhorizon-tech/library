@@ -45,7 +45,7 @@ const readStatus = (book, card) => {
   createBtn.textContent = 'Toggle status';
   createBtn.setAttribute('class', 'btn btn-success');
   card.appendChild(createBtn);
-}
+};
 
 const displayBook = (book) => {
   const BookGroup = document.querySelector('#book-group');
@@ -83,4 +83,6 @@ const displayBook = (book) => {
   BookGroup.appendChild(card);
 };
 
-export { myLibrary, showAlert, deleteGroup, readStatus, displayBook};
+export {
+  myLibrary, showAlert, deleteGroup, readStatus, displayBook,
+};
