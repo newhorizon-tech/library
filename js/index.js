@@ -14,10 +14,24 @@ function Book(author, title, pages, read) {
 
 const addBookToLibrary = (CurrentBook) => {
   myLibrary.push(CurrentBook);
-  myLibrary.forEach(book => console.log(book.title))
+  // myLibrary.forEach(book => console.log(book.title))
   return false;
 }
 
+deleteGroup = (book, card) => {
+  const createBtn = document.createElement('button');
+
+  createBtn.addEventListener('click', () => {
+    card.parentNode.removeChild(card);
+    if (myLibrary.indexOf(book) !== -1) {
+      myLibrary.splice(myLibrary.indexOf(book), 1);
+    }
+  });
+
+  createBtn.textContent = 'Delete';
+  createBtn.setAttribute('class', 'btn btn-danger mr-2 ml-3');
+  card.appendChild(createBtn);
+};
 
 displayBook = (book) => {
   const BookGroup = document.querySelector('#book-group');
@@ -27,10 +41,10 @@ displayBook = (book) => {
   const cardbody = document.createElement('div');
   cardbody.className = "card-body";
 
-  const title = document.createElement('h5');
+  const title = document.createElement('p');
   title.className = "card-title";
 
-  const author = document.createElement('p');
+  const author = document.createElement('h5');
   author.className = "card-text";
 
   const pages = document.createElement('p');
@@ -45,13 +59,15 @@ displayBook = (book) => {
   pages.textContent = book.pages + ' Pages';
   read.textContent = 'Have you read the book? ' + book.read;
 
-  cardbody.appendChild(title);
   cardbody.appendChild(author);
+  cardbody.appendChild(title);
   cardbody.appendChild(pages);
   cardbody.appendChild(read);
-
+  
   card.appendChild(cardbody);
+  deleteGroup(book, card);
   BookGroup.appendChild(card);
+  
 };
 
 // console.log(displayBook);
