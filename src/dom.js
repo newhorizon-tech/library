@@ -1,3 +1,5 @@
+import { deleteOption, toggleStatus } from './app'; 
+ 
 const myLibrary = [];
 
 function showAlert(message, className) {
@@ -15,14 +17,7 @@ function showAlert(message, className) {
 
 const deleteGroup = (book, card) => {
   const createBtn = document.createElement('button');
-
-  createBtn.addEventListener('click', () => {
-    card.parentNode.removeChild(card);
-    if (myLibrary.indexOf(book) !== -1) {
-      myLibrary.splice(myLibrary.indexOf(book), 1);
-    }
-  });
-
+  deleteOption(createBtn, book, card);
   createBtn.textContent = 'Delete';
   createBtn.setAttribute('class', 'btn btn-danger mr-2 ml-3');
   card.appendChild(createBtn);
@@ -30,18 +25,7 @@ const deleteGroup = (book, card) => {
 
 const readStatus = (book, card) => {
   const createBtn = document.createElement('button');
-
-  createBtn.addEventListener('click', () => {
-    const status = card.querySelector('.read-status');
-    if (book.read === 'Read') {
-      status.textContent = 'Not Read';
-      book.read = 'Not Read';
-    } else {
-      status.textContent = 'Read';
-      book.read = 'Read';
-    }
-  });
-
+  toggleStatus(createBtn, book, card);
   createBtn.textContent = 'Toggle status';
   createBtn.setAttribute('class', 'btn btn-success');
   card.appendChild(createBtn);
