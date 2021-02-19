@@ -1,3 +1,5 @@
+const myLibrary = [];
+
 function deleteOption(button, book, card) {
   button.addEventListener('click', () => {
     card.parentNode.removeChild(card);
@@ -6,7 +8,7 @@ function deleteOption(button, book, card) {
     }
   });
 }
- 
+
 function toggleStatus(button, book, card) {
   button.addEventListener('click', () => {
     const status = card.querySelector('.read-status');
@@ -21,4 +23,4 @@ function toggleStatus(button, book, card) {
 }
 
 
-export { deleteOption, toggleStatus };
+export { deleteOption, toggleStatus, myLibrary };

@@ -1,6 +1,4 @@
-import { deleteOption, toggleStatus } from './app'; 
- 
-const myLibrary = [];
+import { deleteOption, toggleStatus, myLibrary } from './app';
 
 function showAlert(message, className) {
   const div = document.createElement('div');
