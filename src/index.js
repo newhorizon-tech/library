@@ -4,10 +4,9 @@ const { newBookForm } = document.forms;
 const submit = document.querySelector('#form-button');
 
 function Book(author, title, pages, read) {
-  this.author = author;
-  this.title = title;
-  this.pages = pages;
-  this.read = read;
+  return {
+    author, title, pages, read,
+  };
 }
 
 const addBookToLibrary = (CurrentBook) => {
@@ -30,7 +29,7 @@ submit.onclick = () => {
   if (title === '' || author === '' || parseInt(pages, 10) < 1) {
     showAlert('Invalid input', 'danger');
   } else {
-    const book = new Book(title, author, pages, read);
+    const book = Book(title, author, pages, read);
     displayBook(book);
     addBookToLibrary(book);
     showAlert('Book added!', 'success');
