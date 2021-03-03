@@ -65,6 +65,12 @@ const displayBook = (book) => {
   BookGroup.appendChild(card);
 };
 
+const displayLibrary = (myLibrary) => {
+  const BookGroup = document.querySelector('#book-group');
+  BookGroup.innerHTML = '';
+  myLibrary.forEach((book) => displayBook(book));
+};
+
 export {
-  myLibrary, showAlert, deleteGroup, readStatus, displayBook,
+  myLibrary, showAlert, deleteGroup, readStatus, displayBook, displayLibrary,
 };

@@ -1,10 +1,17 @@
-const myLibrary = [];
+let library = JSON.parse(localStorage.getItem('myLibrary'));
+
+if (library == null) {
+  library = [];
+}
+
+const myLibrary = library;
 
 function deleteOption(button, book, card) {
   button.addEventListener('click', () => {
     card.parentNode.removeChild(card);
     if (myLibrary.indexOf(book) !== -1) {
       myLibrary.splice(myLibrary.indexOf(book), 1);
+      localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
     }
   });
 }
@@ -21,6 +28,5 @@ function toggleStatus(button, book, card) {
     }
   });
 }
-
 
 export { deleteOption, toggleStatus, myLibrary };

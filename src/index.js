@@ -1,4 +1,4 @@
-import { myLibrary, showAlert, displayBook } from './dom';
+import { myLibrary, showAlert, displayLibrary } from './dom';
 
 const { newBookForm } = document.forms;
 const submit = document.querySelector('#form-button');
@@ -11,8 +11,12 @@ function Book(author, title, pages, read) {
 
 const addBookToLibrary = (CurrentBook) => {
   myLibrary.push(CurrentBook);
+  localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
+  displayLibrary(myLibrary);
   return false;
 };
+
+displayLibrary(myLibrary);
 
 submit.onclick = () => {
   const title = newBookForm.querySelector('input[name="title"').value;
@@ -30,7 +34,6 @@ submit.onclick = () => {
     showAlert('Invalid input', 'danger');
   } else {
     const book = Book(title, author, pages, read);
-    displayBook(book);
     addBookToLibrary(book);
     showAlert('Book added!', 'success');
   }
